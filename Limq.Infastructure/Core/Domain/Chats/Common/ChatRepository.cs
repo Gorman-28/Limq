@@ -19,10 +19,17 @@ public class ChatRepository : IChatRepository
         return Unit.Value;
     }
 
-    public async Task<Unit> Remove(Guid id)
+    public async Task<Unit> Remove(Guid firstUserId, Guid secondUserId)
     {
-        var chat = await _limqDbContext.Chats.FirstOrDefaultAsync(c => c.FirstUser == id);
+        var chat = await _limqDbContext.Chats.FirstOrDefaultAsync(c => c.FirstUser == firstUserId && c.SecondUser == secondUserId);
         _limqDbContext.Chats.Remove(chat);
+        return Unit.Value;
+    }
+
+    public async Task<Unit> RemoveRange(Guid id)
+    {
+        var chat = await _limqDbContext.Chats.Where(c => c.FirstUser == id).ToListAsync();
+        _limqDbContext.Chats.RemoveRange(chat);
         return Unit.Value;
     }
 }

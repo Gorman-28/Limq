@@ -22,13 +22,13 @@ public class UserRepository : IUserRepository
 
     public async Task<User> Find(Guid id)
     {
-        var user = await _limqDbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+        var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         return user;
     }
 
     public async Task<Unit> Remove(Guid id)
     {
-        var user = await _limqDbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+        var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         _limqDbContext.Users.Remove(user);
         return Unit.Value;
     }
