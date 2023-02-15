@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\Domain\Chats\Queries\" />
+    <Folder Include="Core\Domain\MessagesChat\Queries\" />
+    <Folder Include="Core\Domain\MessagesSquad\Queries\" />
+    <Folder Include="Core\Domain\Squads\Queries\" />
+    <Folder Include="Core\Domain\UserSquads\Queries\" />
+    <Folder Include="Core\Domain\Users\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Limq.Core\Limq.Core.csproj" />
+    <ProjectReference Include="..\Limq.Persistence\Limq.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
