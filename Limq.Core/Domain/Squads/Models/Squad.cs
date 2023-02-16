@@ -16,11 +16,13 @@ public class Squad
     }
     public Guid Id { get; private set; }
 
-    public string Name { get; private set; }
+    public string Name { get; set; }
 
-    public List<byte> Avatar { get; private set; }
+#pragma warning disable CA2227 // Collection properties should be read only
+    public List<byte> Avatar { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
-    public Guid AdminId { get; private set; }
+    public Guid AdminId { get; set; }
 
     public ICollection<UserSquad> UserGroups { get; private set; }
 

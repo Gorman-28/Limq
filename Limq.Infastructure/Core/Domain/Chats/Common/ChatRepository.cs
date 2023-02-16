@@ -19,6 +19,12 @@ public class ChatRepository : IChatRepository
         return Unit.Value;
     }
 
+    public async Task<Chat> Find(Guid firstUserId, Guid secondUserId)
+    {
+        var chat = await _limqDbContext.Chats.FirstOrDefaultAsync(c => c.FirstUser == firstUserId && c.SecondUser == secondUserId);
+        return chat ?? null;
+    }
+
     public async Task<Unit> Remove(Guid firstUserId, Guid secondUserId)
     {
         var chat = await _limqDbContext.Chats.FirstOrDefaultAsync(c => c.FirstUser == firstUserId && c.SecondUser == secondUserId);

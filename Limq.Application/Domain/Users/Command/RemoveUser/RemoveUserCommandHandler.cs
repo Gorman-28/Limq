@@ -19,7 +19,7 @@ public class RemoveUserCommandHandler : IRequestHandler<RemoveUserCommand, Unit>
     public async Task<Unit> Handle(RemoveUserCommand command, CancellationToken cancellationToken)
     {
         await _userRepository.Remove(command.Id);
-        await _chatRepository.Remove(command.Id);
+        await _chatRepository.RemoveRange(command.Id);
         await _unitOfWork.SaveChanges();
         return Unit.Value;
     }

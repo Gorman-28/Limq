@@ -20,9 +20,9 @@ public class MessageSquad
 
     public Guid UserFromId { get; private set; }
 
-    public string Message { get; private set; }
+    public string Message { get; set; }
 
-    public DateTimeOffset MessageTime { get; private set; }
+    public DateTimeOffset MessageTime { get; set; }
 
     public static MessageSquad Create(Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime)
     {

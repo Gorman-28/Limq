@@ -13,12 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Chats\Command\RemoveChat\" />
-    <Folder Include="Domain\Chats\Queries\" />
-    <Folder Include="Domain\Users\Command\ChangeUser\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Limq.Core\Limq.Core.csproj" />
   </ItemGroup>
 

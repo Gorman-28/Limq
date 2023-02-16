@@ -6,6 +6,8 @@ public interface IChatRepository
 {
     Task<Unit> Add(Chat chat);
 
+    Task<Chat> Find(Guid firstUserId, Guid secondUserId);
+
     Task<Unit> Remove(Guid firstUserId, Guid secondUserId);
 
     Task<Unit> RemoveRange(Guid id);

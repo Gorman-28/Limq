@@ -21,9 +21,9 @@ public class MessageChat
 
     public Guid UserToId { get; private set; }
 
-    public string Message { get; private set; }
+    public string Message { get; set; }
 
-    public DateTimeOffset MessageTime { get; private set; }
+    public DateTimeOffset MessageTime { get; set; }
 
     public static MessageChat Create(Guid userFromId, Guid userToId, string message, DateTimeOffset messageTime)
     {
