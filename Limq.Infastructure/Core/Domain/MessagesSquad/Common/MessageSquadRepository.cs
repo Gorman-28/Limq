@@ -1,5 +1,6 @@
 ﻿using Limq.Core.Domain.Messages.Common;
 using Limq.Core.Domain.Messages.Models;
+using Limq.Core.Domain.Squads.Models;
 using Limq.Persistence.LimqDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,13 @@ public class MessageSquadRepository : IMessageSquadRepository
     public async Task<Unit> RemoveRange(Guid squadId)
     {
         var messageSquad = await _limqDbContext.MessagesSquad.Where(ms => ms.SquadId == squadId).ToListAsync();
+        _limqDbContext.MessagesSquad.RemoveRange(messageSquad);
+        return Unit.Value;
+    }
+
+    public async Task<Unit> RemoveRangeFromUser(Guid userId)
+    {
+        var messageSquad = await _limqDbContext.MessagesSquad.Where(ms => ms.UserFromId == userId).ToListAsync();
         _limqDbContext.MessagesSquad.RemoveRange(messageSquad);
         return Unit.Value;
     }

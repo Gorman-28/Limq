@@ -25,4 +25,11 @@ public class UserSquadRepository : IUserSquadRepository
         _limqDbContext.UserSquads.Remove(userSquad);
         return Unit.Value;
     }
+
+    public async Task<Unit> RemoveRange(Guid userId)
+    {
+        var userSquads = await _limqDbContext.UserSquads.Where(us => us.UserId == userId).ToListAsync();
+        _limqDbContext.UserSquads.RemoveRange(userSquads);
+        return Unit.Value;
+    }
 }

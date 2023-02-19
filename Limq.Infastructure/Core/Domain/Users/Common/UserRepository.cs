@@ -20,9 +20,9 @@ public class UserRepository : IUserRepository
         return Unit.Value;
     }
 
-    public async Task<User> Find(Guid id)
+    public async Task<User> Find(string name)
     {
-        var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+        var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.UserName == name);
         return user;
     }
 

@@ -6,7 +6,7 @@ public interface IUserRepository
 {
     Task<Unit> Add(User user);
 
-    Task<User> Find(Guid id);
+    Task<User> Find(string name);
 
     Task<Unit> Remove(Guid id);
 }

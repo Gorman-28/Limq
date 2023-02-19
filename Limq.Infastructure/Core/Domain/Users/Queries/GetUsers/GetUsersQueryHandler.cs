@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Limq.Infastructure.Core.Domain.Users.Queries.GetUsers;
-public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, GetUsersDto[]>
+public class GetUsersQueryHandler : IRequestHandler<GetUserQuery, GetUsersDto[]>
 {
     private readonly LimqDbContext _limqDbContext;
 
@@ -12,7 +12,7 @@ public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, GetUsersDto[]
     {
         _limqDbContext = limqDbContext;
     }
-    public async Task<GetUsersDto[]> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+    public async Task<GetUsersDto[]> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
         var sqlquery = _limqDbContext.Users.AsNoTracking();
         var data = await sqlquery

@@ -19,22 +19,29 @@ public class MessageChatRepository : IMessageChatRepository
         return Unit.Value;
     }
 
-    public async Task<MessageChat> Find(Guid userFromid, Guid userToid, DateTimeOffset time)
+    public async Task<MessageChat> Find(Guid userFromId, Guid userToId, DateTimeOffset time)
     {
-        var messageChat = await _limqDbContext.MessagesChat.FirstOrDefaultAsync(mc => mc.UserFromId == userFromid && mc.UserToId == userToid && mc.MessageTime.Equals(time));
+        var messageChat = await _limqDbContext.MessagesChat.FirstOrDefaultAsync(mc => mc.UserFromId == userFromId && mc.UserToId == userToId && mc.MessageTime.Equals(time));
         return messageChat;
     }
 
-    public async Task<Unit> Remove(Guid userFromid, Guid userToid, DateTimeOffset time)
+    public async Task<Unit> Remove(Guid userFromId, Guid userToId, DateTimeOffset time)
     {
-        var messageChat = await _limqDbContext.MessagesChat.FirstOrDefaultAsync(mc => mc.UserFromId == userFromid && mc.UserToId == userToid && mc.MessageTime.Equals(time));
+        var messageChat = await _limqDbContext.MessagesChat.FirstOrDefaultAsync(mc => mc.UserFromId == userFromId && mc.UserToId == userToId && mc.MessageTime.Equals(time));
         _limqDbContext.MessagesChat.Remove(messageChat);
         return Unit.Value;
     }
 
-    public async Task<Unit> RemoveRange(Guid userFromid, Guid userToid)
+    public async Task<Unit> RemoveRange(Guid userFromId, Guid userToId)
     {
-        var messageChat = await _limqDbContext.MessagesChat.Where(ms => ms.UserFromId == userFromid && ms.UserToId == ms.UserToId).ToListAsync();
+        var messageChat = await _limqDbContext.MessagesChat.Where(ms => ms.UserFromId == userFromId && ms.UserToId == userToId).ToListAsync();
+        _limqDbContext.MessagesChat.RemoveRange(messageChat);
+        return Unit.Value;
+    }
+
+    public async Task<Unit> RemoveRangeFromUser(Guid userFromId)
+    {
+        var messageChat = await _limqDbContext.MessagesChat.Where(ms => ms.UserFromId == userFromId).ToListAsync();
         _limqDbContext.MessagesChat.RemoveRange(messageChat);
         return Unit.Value;
     }

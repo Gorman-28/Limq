@@ -16,8 +16,10 @@ public class CreateChatCommandHandler : IRequestHandler<CreateChatCommand, Unit>
     }
     public async Task<Unit> Handle(CreateChatCommand command, CancellationToken cancellationToken)
     {
-        var chat = Chat.Create(command.FirstUser, command.SecondUser);
-        await _chatrepository.Add(chat);
+        var chat1 = Chat.Create(command.FirstUser, command.SecondUser);
+        var chat2 = Chat.Create(command.SecondUser, command.FirstUser);
+        await _chatrepository.Add(chat1);
+        await _chatrepository.Add(chat2);
         await _unitOfWork.SaveChanges();
         return Unit.Value;
     }

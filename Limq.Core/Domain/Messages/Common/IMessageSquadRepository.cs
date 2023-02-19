@@ -11,4 +11,6 @@ public interface IMessageSquadRepository
     Task<Unit> Remove(Guid squadId, Guid userId, DateTimeOffset dateTimeOffset);
 
     Task<Unit> RemoveRange(Guid squadId);
+
+    Task<Unit> RemoveRangeFromUser(Guid userId);
 }
