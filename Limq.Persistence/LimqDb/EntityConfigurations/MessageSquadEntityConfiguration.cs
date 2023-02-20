@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Limq.Persistence.LimqDb.EntityConfigurations;
-public class MessageSquadtEntityConfiguration : IEntityTypeConfiguration<MessageSquad>
+public class MessageSquadEntityConfiguration : IEntityTypeConfiguration<MessageSquad>
 {
     public void Configure(EntityTypeBuilder<MessageSquad> builder)
     {

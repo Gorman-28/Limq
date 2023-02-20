@@ -26,6 +26,12 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public async Task<User> Find(Guid id)
+    {
+        var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+        return user;
+    }
+
     public async Task<Unit> Remove(Guid id)
     {
         var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.Id == id);

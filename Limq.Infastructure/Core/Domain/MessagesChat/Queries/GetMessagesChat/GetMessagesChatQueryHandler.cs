@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Limq.Infastructure.Core.Domain.MessagesChat.Queries.GetMessagesChat;
-public class GetMessagesChatQueryHandler : IRequestHandler<GetMessagesSquadQuery, GetMessagesChatDto[]>
+public class GetMessagesChatQueryHandler : IRequestHandler<GetMessagesChatQuery, GetMessagesChatDto[]>
 {
     private readonly LimqDbContext _limqDbContext;
 
@@ -12,7 +12,7 @@ public class GetMessagesChatQueryHandler : IRequestHandler<GetMessagesSquadQuery
     {
         _limqDbContext = limqDbContext;
     }
-    public Task<GetMessagesChatDto[]> Handle(GetMessagesSquadQuery request, CancellationToken cancellationToken)
+    public Task<GetMessagesChatDto[]> Handle(GetMessagesChatQuery request, CancellationToken cancellationToken)
     {
         var sqlQuery = _limqDbContext.MessagesChat.AsNoTracking();
 

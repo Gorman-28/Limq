@@ -91,6 +91,16 @@ public class UsersController : ControllerBase
         return Unit.Value;
     }
 
+    [HttpPut()]
+    [Route("ChangeStatus")]
+
+    public async Task<Unit> ChangeStatus([FromBody] ChangeStatusRequest request, CancellationToken cancellationToken)
+    {
+        var command = new ChangeStatusCommand(request.Id, request.Status);
+        await _mediator.Send(command, cancellationToken);
+        return Unit.Value;
+    }
+
     [HttpPost()]
 
     public async Task<Unit> CreateUser([FromBody] CreateUserRequest request, CancellationToken cancellationToken)

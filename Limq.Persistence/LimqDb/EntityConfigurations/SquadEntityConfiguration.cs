@@ -1,4 +1,4 @@
-﻿using Limq.Core.Domain.Groups.Models;
+﻿using Limq.Core.Domain.Squads.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

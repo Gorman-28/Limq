@@ -10,4 +10,6 @@ public static class Routes
     public const string Squads = Api + "/squads";
     public const string Users = Api + "/users";
     public const string UsersSquad = Api + "/usersSquad";
+    public const string UserChatsBlocked = Api + "/userChatsBlocked";
+    public const string UserSquadsBlocked = Api + "/userSquadsBlocked";
 }

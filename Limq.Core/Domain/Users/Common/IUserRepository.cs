@@ -8,5 +8,7 @@ public interface IUserRepository
 
     Task<User> Find(string name);
 
+    Task<User> Find(Guid id);
+
     Task<Unit> Remove(Guid id);
 }

@@ -13,6 +13,10 @@ public class LimqDbContext : DbContext
 
     public DbSet<UserSquad>? UserSquads { get; set; }
 
+    public DbSet<UserChatBlocked>? UserChatsBlocked { get; set; }
+
+    public DbSet<UserSquadBlocked>? UserSquadsBlocked { get; set; }
+
     public DbSet<MessageChat>? MessagesChat { get; set; }
 
     public DbSet<MessageSquad>? MessagesSquad { get; set; }
@@ -32,9 +36,12 @@ public class LimqDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
-        modelBuilder.ApplyConfiguration(new UserGroupEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new UserSquadEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new UserChatBlockedEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new UserSquadBlockedEntityConfiguration());
         modelBuilder.ApplyConfiguration(new ChatEntityConfiguration());
         modelBuilder.ApplyConfiguration(new MessageChatEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new MessageSquadEntityConfiguration());
         modelBuilder.ApplyConfiguration(new SquadEntityConfiguration());
     }
 }

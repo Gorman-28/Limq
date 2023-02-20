@@ -1,4 +1,5 @@
-﻿using Limq.Core.Common;
+﻿using Limq.Application.Domain.MessagesSquad.Command.CreateMessageSquad;
+using Limq.Core.Common;
 using Limq.Core.Domain.Messages.Common;
 using Limq.Core.Domain.Messages.Models;
 using MediatR;
@@ -16,7 +17,7 @@ public class CreateMessageSquadCommandHandler : IRequestHandler<CreateMessageSqu
     }
     public async Task<Unit> Handle(CreateMessageSquadCommand command, CancellationToken cancellationToken)
     {
-        var message = MessageChat.Create(command.UserFromId, command.UserToId, command.Message, command.MessageTime);
+        var message = MessageChat.Create(command.UserFromId, command.SquadId, command.Message, command.MessageTime);
         await _messageChatRepository.Add(message);
         await _unitOfWork.SaveChanges();
         return Unit.Value;

@@ -34,7 +34,11 @@ public class User
 
     public bool Status { get; set; }
 
-    public ICollection<UserSquad> UserGroups { get; private set; }
+    public ICollection<UserSquad> UserSquads { get; private set; }
+
+    public ICollection<UserChatBlocked> UserChatsBlocked { get; private set; }
+
+    public ICollection<UserSquadBlocked> UserSquadsBlocked { get; private set; }
 
     public static User Create(string userName, string password, string firstName, string lastName, List<byte> avatar)
     {

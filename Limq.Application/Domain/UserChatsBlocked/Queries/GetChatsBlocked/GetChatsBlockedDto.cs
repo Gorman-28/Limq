@@ -1,5 +1,5 @@
-﻿namespace Limq.Application.Domain.Chats.Queries.GetAllChats;
-public record GetAllChatsDto
+﻿namespace Limq.Application.Domain.UserChatsBlocked.Queries.GetChatsBlocked;
+public record GetChatsBlockedDto
 {
     public Guid Id { get; set; }
     public string UserName { get; set; }
@@ -13,7 +13,4 @@ public record GetAllChatsDto
 
     public bool Status { get; set; }
 
-    public string Message { get; set; }
-
-    public DateTimeOffset MessageTime { get; set; }
 }

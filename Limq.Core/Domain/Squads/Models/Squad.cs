@@ -24,7 +24,9 @@ public class Squad
 
     public Guid AdminId { get; set; }
 
-    public ICollection<UserSquad> UserGroups { get; private set; }
+    public ICollection<UserSquad> UserSquads { get; private set; }
+
+    public ICollection<UserSquadBlocked> UserSquadsBlocked { get; private set; }
 
     public static Squad Create(string name, List<byte> avatar, Guid adminId)
     {

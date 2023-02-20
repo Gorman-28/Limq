@@ -19,6 +19,7 @@ public class GetAllChatsQueryHandler : IRequestHandler<GetAllChatsQuery, GetAllC
                        from m in _limqDbContext.MessagesChat.Where(m => m.UserFromId == c.FirstUser && m.UserToId == c.SecondUser || m.UserFromId == c.SecondUser && m.UserToId == c.FirstUser).OrderBy(m => m.MessageTime)
                        select new GetAllChatsDto
                        {
+                           Id = u.Id,
                            UserName = u.UserName,
                            FirstName = u.FirstName,
                            LastName = u.LastName,
