@@ -7,7 +7,7 @@ public class Squad
     {
     }
 
-    private Squad(Guid id, string name, List<byte> avatar, Guid adminId)
+    private Squad(Guid id, string name, byte[] avatar, Guid adminId)
     {
         Id = id;
         Name = name;
@@ -18,9 +18,9 @@ public class Squad
 
     public string Name { get; set; }
 
-#pragma warning disable CA2227 // Collection properties should be read only
-    public List<byte> Avatar { get; set; }
-#pragma warning restore CA2227 // Collection properties should be read only
+#pragma warning disable CA1819 // Properties should not return arrays
+    public byte[] Avatar { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     public Guid AdminId { get; set; }
 
@@ -28,7 +28,7 @@ public class Squad
 
     public ICollection<UserSquadBlocked> UserSquadsBlocked { get; private set; }
 
-    public static Squad Create(string name, List<byte> avatar, Guid adminId)
+    public static Squad Create(string name, byte[] avatar, Guid adminId)
     {
         return new Squad(Guid.NewGuid(), name, avatar, adminId);
     }

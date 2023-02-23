@@ -19,7 +19,7 @@ public class UsersSquadController : ControllerBase
     }
 
     [HttpPost]
-
+    [Route("CreateUserSquad")]
     public async Task<Unit> CreateUserSquad([FromBody] CreateUserSquadRequest request, CancellationToken cancellationToken)
     {
         var command = new CreateUserSquadCommand(request.UserId, request.SquadId);
@@ -28,7 +28,7 @@ public class UsersSquadController : ControllerBase
     }
 
     [HttpDelete]
-
+    [Route("DeleteUserSquad")]
     public async Task<Unit> RemoveUserSquad([FromBody] RemoveUserSquadRequest request, CancellationToken cancellationToken)
     {
         var command = new RemoveUserSquadCommand(request.UserId, request.SquadId);

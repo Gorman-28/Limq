@@ -8,8 +8,10 @@ using Limq.Infastructure.Core.Domain.Chats.Common;
 using Limq.Infastructure.Core.Domain.MessagesChat.Common;
 using Limq.Infastructure.Core.Domain.MessagesSquad.Common;
 using Limq.Infastructure.Core.Domain.Squads.Common;
+using Limq.Infastructure.Core.Domain.UserChatsBlocked.Common;
 using Limq.Infastructure.Core.Domain.Users.Common;
 using Limq.Infastructure.Core.Domain.UserSquads.Common;
+using Limq.Infastructure.Core.Domain.UserSquadsBlocked.Common;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,6 +34,8 @@ public static class InfastructureRegistration
 
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<IUserSquadRepository, UserSquadRepository>();
+        services.AddSingleton<IUserChatBlockedRepository, UserChatBlockedRepository>();
+        services.AddSingleton<IUserSquadBlockedRepository, UserSquadBlockedRepository>();
         services.AddSingleton<IChatRepository, ChatRepository>();
         services.AddSingleton<IMessageChatRepository, MessageChatRepository>();
         services.AddSingleton<IMessageSquadRepository, MessageSquadRepository>();

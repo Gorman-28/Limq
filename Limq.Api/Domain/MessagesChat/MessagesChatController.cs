@@ -21,8 +21,9 @@ public class MessagesChatController : ControllerBase
     }
 
     [HttpGet]
+    [Route("GetMessagesChats")]
 
-    public async Task<GetMessagesChatDto[]> GetMessagesChats([FromBody] GetMessagesChatRequest request, CancellationToken cancellationToken)
+    public async Task<GetMessagesChatDto[]> GetMessagesChats([FromQuery] GetMessagesChatRequest request, CancellationToken cancellationToken)
     {
         var query = new GetMessagesChatQuery(request.UserFromId, request.UserToId);
         var chatMessages = await _mediator.Send(query, cancellationToken);
@@ -30,6 +31,7 @@ public class MessagesChatController : ControllerBase
     }
 
     [HttpPut]
+    [Route("ChangeMessagesChats")]
 
     public async Task<Unit> ChangeMessageChat([FromBody] ChangeMessageChatRequest request, CancellationToken cancellationToken)
     {
@@ -39,7 +41,7 @@ public class MessagesChatController : ControllerBase
     }
 
     [HttpPost]
-
+    [Route("CreateMessagesChats")]
     public async Task<Unit> CreateMessageChat([FromBody] CreateMessageChatRequest request, CancellationToken cancellationToken)
     {
         var command = new CreateMessageChatCommand(request.UserFromId, request.UserToId, request.Message, request.MessageTime);
@@ -48,6 +50,7 @@ public class MessagesChatController : ControllerBase
     }
 
     [HttpDelete]
+    [Route("DeleteMessagesChats")]
 
     public async Task<Unit> RemoveMessageChat([FromBody] RemoveMessageChatRequest request, CancellationToken cancellationToken)
     {

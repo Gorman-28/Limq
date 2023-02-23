@@ -16,8 +16,8 @@ public class GetMessagesChatQueryHandler : IRequestHandler<GetMessagesChatQuery,
     {
         var sqlQuery = _limqDbContext.MessagesChat.AsNoTracking();
 
-        var data = sqlQuery.Where(mc => (mc.UserFromId == request.UserFromId && mc.UserToId == mc.UserToId) || (mc.UserFromId == request.UserToId && mc.UserToId == mc.UserFromId))
-            .OrderByDescending(mc => mc.MessageTime)
+        var data = sqlQuery.Where(mc => (mc.UserFromId == request.UserFromId && mc.UserToId == request.UserToId) || (mc.UserFromId == request.UserToId && mc.UserToId == request.UserFromId))
+            .OrderBy(mc => mc.MessageTime)
             .Select(messageChat => new GetMessagesChatDto
             {
                 UserFromId = messageChat.UserFromId,

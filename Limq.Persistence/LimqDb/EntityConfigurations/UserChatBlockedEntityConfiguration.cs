@@ -10,11 +10,11 @@ public class UserChatBlockedEntityConfiguration : IEntityTypeConfiguration<UserC
         builder.HasKey(ucb => new { ucb.FirstUser, ucb.SecondUser });
 
         builder.HasOne(ucb => ucb.User1)
-            .WithMany(u => u.UserChatsBlocked)
+            .WithMany(u => u.UserChatsBlocked1)
             .HasForeignKey(ucb => ucb.FirstUser);
 
         builder.HasOne(ucb => ucb.User2)
-            .WithMany(u => u.UserChatsBlocked)
+            .WithMany(u => u.UserChatsBlocked2)
             .HasForeignKey(ucb => ucb.SecondUser);
     }
 }

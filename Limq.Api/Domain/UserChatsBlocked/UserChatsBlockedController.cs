@@ -20,8 +20,9 @@ public class UserChatsBlockedController : ControllerBase
     }
 
     [HttpGet()]
+    [Route("GetUserChatBlocked")]
 
-    public async Task<GetChatsBlockedDto[]> GetChatsBlocked([FromBody] Guid id, CancellationToken cancellationToken)
+    public async Task<GetChatsBlockedDto[]> GetChatsBlocked([FromQuery] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetChatsBlockedQuery(id);
         var chatsBlocked = await _mediator.Send(query, cancellationToken);
@@ -29,6 +30,7 @@ public class UserChatsBlockedController : ControllerBase
     }
 
     [HttpPost()]
+    [Route("CreateUserChatBlocked")]
 
     public async Task<Unit> CreateChatBlocked([FromBody] CreateUserBlockedRequest request, CancellationToken cancellationToken)
     {
@@ -38,6 +40,7 @@ public class UserChatsBlockedController : ControllerBase
     }
 
     [HttpDelete()]
+    [Route("DeleteUserChatBlocked")]
 
     public async Task<Unit> RemoveChatBlocked([FromBody] RemoveChatBlockedRequest request, CancellationToken cancellationToken)
     {

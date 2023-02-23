@@ -15,8 +15,8 @@ public class GetSquadsQueryHandler : IRequestHandler<GetSquadsQuery, GetSquadsDt
     public async Task<GetSquadsDto[]> Handle(GetSquadsQuery request, CancellationToken cancellationToken)
     {
         var sqlquery = from us in _limqDbContext.UserSquads.Where(us => us.UserId == request.UserId)
+                       from ms in _limqDbContext.MessagesSquad.Where(ms => ms.SquadId == us.SquadId).OrderByDescending(ms => ms.MessageTime).Skip(0).Take(1)
                        join s in _limqDbContext.Squads on us.SquadId equals s.Id
-                       from ms in _limqDbContext.MessagesSquad.Where(ms => ms.SquadId == us.SquadId).OrderBy(ms => ms.MessageTime)
                        select new GetSquadsDto
                        {
                            Id = s.Id,
@@ -24,7 +24,8 @@ public class GetSquadsQueryHandler : IRequestHandler<GetSquadsQuery, GetSquadsDt
                            Avatar = s.Avatar,
                            AdminId = s.AdminId,
                            Message = ms.Message,
-                           MessageTime = ms.MessageTime
+                           MessageTime = ms.MessageTime,
+                           SystemMessage = ms.SystemMessage
                        };
 
         var data = await sqlquery

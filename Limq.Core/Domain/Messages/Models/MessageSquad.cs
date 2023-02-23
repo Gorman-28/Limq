@@ -5,13 +5,14 @@ public class MessageSquad
     {
     }
 
-    private MessageSquad(Guid id, Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime)
+    private MessageSquad(Guid id, Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime, bool systemMessage)
     {
         Id = id;
         SquadId = squadId;
         UserFromId = userFromId;
         Message = message;
         MessageTime = messageTime;
+        SystemMessage = systemMessage;
     }
 
     public Guid Id { get; private set; }
@@ -24,8 +25,10 @@ public class MessageSquad
 
     public DateTimeOffset MessageTime { get; set; }
 
-    public static MessageSquad Create(Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime)
+    public bool SystemMessage { get; set; }
+
+    public static MessageSquad Create(Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime, bool systemMessage)
     {
-        return new MessageSquad(Guid.NewGuid(), squadId, userFromId, message, messageTime);
+        return new MessageSquad(Guid.NewGuid(), squadId, userFromId, message, messageTime, systemMessage);
     }
 }

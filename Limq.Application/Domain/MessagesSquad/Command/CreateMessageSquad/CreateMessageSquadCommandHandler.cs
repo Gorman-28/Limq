@@ -16,7 +16,7 @@ public class CreateMessageSquadCommandHandler : IRequestHandler<CreateMessageSqu
     }
     public async Task<Unit> Handle(CreateMessageSquadCommand command, CancellationToken cancellationToken)
     {
-        var messageSquad = MessageSquad.Create(command.SquadId, command.UserFromId, command.Message, command.MessageTime);
+        var messageSquad = MessageSquad.Create(command.SquadId, command.UserFromId, command.Message, command.MessageTime, command.SystemMessage);
         await _messageSquadRepository.Add(messageSquad);
         await _unitOfWork.SaveChanges();
         return Unit.Value;

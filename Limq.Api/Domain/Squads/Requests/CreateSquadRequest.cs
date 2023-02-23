@@ -1,3 +1,4 @@
 ﻿namespace Limq.Api.Domain.Squads.Requests;
 
-public record CreateSquadRequest(string Name, List<byte> Avatar, Guid AdminId);
+public record CreateSquadRequest(string Name, IFormFile Avatar, Guid AdminId);
+

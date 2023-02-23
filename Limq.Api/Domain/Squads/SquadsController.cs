@@ -21,8 +21,8 @@ public class SquadsController : ControllerBase
     }
 
     [HttpGet]
-
-    public async Task<GetSquadsDto[]> GetSquads(Guid id, CancellationToken cancellationToken)
+    [Route("GetSquads")]
+    public async Task<GetSquadsDto[]> GetSquads([FromQuery] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetSquadsQuery(id);
         var squads = await _mediator.Send(query, cancellationToken);
@@ -52,25 +52,38 @@ public class SquadsController : ControllerBase
     [HttpPut]
     [Route("ChangeSquadAvatar")]
 
-    public async Task<Unit> ChangeSquadAvatar([FromBody] ChangeSquadAvatarRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> ChangeSquadAvatar([FromForm] ChangeSquadAvatarRequest request, CancellationToken cancellationToken)
     {
-        var command = new ChangeSquadAvatarCommand(request.Id, request.NewAvatar);
+        byte[] imageData = null;
+        if (request.NewAvatar != null)
+        {
+            using var binaryReader = new BinaryReader(request.NewAvatar.OpenReadStream());
+            imageData = binaryReader.ReadBytes((int)request.NewAvatar.Length);
+        }
+        var command = new ChangeSquadAvatarCommand(request.Id, imageData);
         await _mediator.Send(command, cancellationToken);
         return Unit.Value;
     }
 
     [HttpPost]
+    [Route("CreateSquad")]
 
-    public async Task<Unit> CreateSquad([FromBody] CreateSquadRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> CreateSquad([FromForm] CreateSquadRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateSquadCommand(request.Name, request.Avatar, request.AdminId);
+        byte[] imageData = null;
+        if (request.Avatar != null)
+        {
+            using var binaryReader = new BinaryReader(request.Avatar.OpenReadStream());
+            imageData = binaryReader.ReadBytes((int)request.Avatar.Length);
+        }
+        var command = new CreateSquadCommand(request.Name, imageData, request.AdminId);
         await _mediator.Send(command, cancellationToken);
         return Unit.Value;
     }
 
     [HttpDelete]
-
-    public async Task<Unit> RemoveSquad([FromBody] Guid id, CancellationToken cancellationToken)
+    [Route("DeleteSquad")]
+    public async Task<Unit> RemoveSquad(Guid id, CancellationToken cancellationToken)
     {
         var command = new RemoveSquadCommand(id);
         await _mediator.Send(command, cancellationToken);

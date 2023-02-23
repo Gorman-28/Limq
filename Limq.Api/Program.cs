@@ -1,4 +1,5 @@
-﻿using Limq.Infastructure;
+﻿using Limq.Application;
+using Limq.Infastructure;
 using Limq.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddApplicationServices();
 builder.Services.AddInfastructureServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 

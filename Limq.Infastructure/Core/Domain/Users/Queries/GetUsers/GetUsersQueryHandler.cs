@@ -16,7 +16,7 @@ public class GetUsersQueryHandler : IRequestHandler<GetUserQuery, GetUsersDto[]>
     {
         var sqlquery = _limqDbContext.Users.AsNoTracking();
         var data = await sqlquery
-            .Where(u => u.UserName == request.Name)
+            .Where(u => u.UserName.Contains(request.Name))
             .OrderBy(u => u.UserName)
             .Select(user => new GetUsersDto
             {
@@ -24,6 +24,7 @@ public class GetUsersQueryHandler : IRequestHandler<GetUserQuery, GetUsersDto[]>
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                Password = user.Password,
                 Status = user.Status,
                 Avatar = user.Avatar
             }).ToArrayAsync(cancellationToken);

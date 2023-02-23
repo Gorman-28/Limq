@@ -22,7 +22,8 @@ public class GetMessagesSquadQueryHandler : IRequestHandler<GetMessagesSquadQuer
                            UserName = u.UserName,
                            Avatar = u.Avatar,
                            Message = ms.Message,
-                           MessageTime = ms.MessageTime
+                           MessageTime = ms.MessageTime,
+                           SystemMessage = ms.SystemMessage
                        };
 
         var data = await sqlQuery

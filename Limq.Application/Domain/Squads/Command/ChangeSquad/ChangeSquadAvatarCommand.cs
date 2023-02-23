@@ -1,5 +1,7 @@
 ﻿using MediatR;
 
 namespace Limq.Application.Domain.Squads.Command.ChangeSquad;
-public record ChangeSquadAvatarCommand(Guid Id, List<byte> NewAvatar) : IRequest<Unit>;
+#pragma warning disable CA1819 // Properties should not return arrays
+public record ChangeSquadAvatarCommand(Guid Id, byte[] NewAvatar) : IRequest<Unit>;
+#pragma warning restore CA1819 // Properties should not return arrays
 

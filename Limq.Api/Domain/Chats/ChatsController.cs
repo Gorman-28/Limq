@@ -20,8 +20,9 @@ public class ChatsController : ControllerBase
     }
 
     [HttpGet()]
+    [Route("GetChats")]
 
-    public async Task<GetAllChatsDto[]> GetAllChats([FromBody] Guid id, CancellationToken cancellationToken)
+    public async Task<GetAllChatsDto[]> GetAllChats([FromQuery] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetAllChatsQuery(id);
         var chats = await _mediator.Send(query, cancellationToken);
@@ -29,6 +30,7 @@ public class ChatsController : ControllerBase
     }
 
     [HttpPost()]
+    [Route("CreateChat")]
 
     public async Task<Unit> CreateChat([FromBody] CreateChatRequest request, CancellationToken cancellationToken)
     {
@@ -38,6 +40,7 @@ public class ChatsController : ControllerBase
     }
 
     [HttpDelete()]
+    [Route("DeleteChat")]
 
     public async Task<Unit> RemoveChat([FromBody] RemoveChatRequest request, CancellationToken cancellationToken)
     {

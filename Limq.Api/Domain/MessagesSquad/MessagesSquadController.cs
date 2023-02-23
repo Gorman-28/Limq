@@ -21,8 +21,9 @@ public class MessagesSquadController : ControllerBase
     }
 
     [HttpGet]
+    [Route("GetMessagesSquad")]
 
-    public async Task<GetMessagesSquadDto[]> GetMessagesSquads([FromBody] Guid squadId, CancellationToken cancellationToken)
+    public async Task<GetMessagesSquadDto[]> GetMessagesSquads([FromQuery] Guid squadId, CancellationToken cancellationToken)
     {
         var query = new GetMessagesSquadQuery(squadId);
         var messagesSquads = await _mediator.Send(query, cancellationToken);
@@ -30,6 +31,7 @@ public class MessagesSquadController : ControllerBase
     }
 
     [HttpPut]
+    [Route("ChangeMessageSquad")]
 
     public async Task<Unit> ChangeMessageSquad([FromBody] ChangeMessageSquadRequest request, CancellationToken cancellationToken)
     {
@@ -39,15 +41,17 @@ public class MessagesSquadController : ControllerBase
     }
 
     [HttpPost]
+    [Route("CreateMessageSquad")]
 
     public async Task<Unit> CreateMessageSquad([FromBody] CreateMessageSquadRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateMessageSquadCommand(request.SquadId, request.UserFromId, request.Message, request.MessageTime);
+        var command = new CreateMessageSquadCommand(request.SquadId, request.UserFromId, request.Message, request.MessageTime, request.SystemMessage);
         await _mediator.Send(command, cancellationToken);
         return Unit.Value;
     }
 
     [HttpDelete]
+    [Route("RemoveMessageSquad")]
 
     public async Task<Unit> RemoveMessageSquad([FromBody] RemoveMessageSquadRequest request, CancellationToken cancellationToken)
     {

@@ -15,8 +15,8 @@ public class GetAllChatsQueryHandler : IRequestHandler<GetAllChatsQuery, GetAllC
     public async Task<GetAllChatsDto[]> Handle(GetAllChatsQuery request, CancellationToken cancellationToken)
     {
         var sqlQuery = from c in _limqDbContext.Chats.Where(c => c.FirstUser == request.Id)
+                       from m in _limqDbContext.MessagesChat.Where(m => m.UserFromId == c.FirstUser && m.UserToId == c.SecondUser || m.UserFromId == c.SecondUser && m.UserToId == c.FirstUser).OrderByDescending(m => m.MessageTime).Skip(0).Take(1)
                        join u in _limqDbContext.Users on c.SecondUser equals u.Id
-                       from m in _limqDbContext.MessagesChat.Where(m => m.UserFromId == c.FirstUser && m.UserToId == c.SecondUser || m.UserFromId == c.SecondUser && m.UserToId == c.FirstUser).OrderBy(m => m.MessageTime)
                        select new GetAllChatsDto
                        {
                            Id = u.Id,

@@ -16,8 +16,9 @@ public class UserSquadsBlockedController : ControllerBase
     }
 
     [HttpGet()]
+    [Route("GetSquadsBlocked")]
 
-    public async Task<GetSquadsBlockedDto[]> GetSquadsBlockeds([FromBody] Guid id, CancellationToken cancellationToken)
+    public async Task<GetSquadsBlockedDto[]> GetSquadsBlockeds([FromQuery] Guid id, CancellationToken cancellationToken)
     {
         var query = new GetSquadsBlockedQuery(id);
         var squadsBlocked = await _mediator.Send(query, cancellationToken);
@@ -25,6 +26,7 @@ public class UserSquadsBlockedController : ControllerBase
     }
 
     [HttpPost()]
+    [Route("CreateSquadBlocked")]
 
     public async Task<Unit> CreateSquadBlocked([FromBody] CreateSquadBlockedRequest request, CancellationToken cancellationToken)
     {
@@ -34,7 +36,7 @@ public class UserSquadsBlockedController : ControllerBase
     }
 
     [HttpDelete()]
-
+    [Route("DeleteSquadBlocked")]
     public async Task<Unit> RemoveSquadBlocked([FromBody] RemoveSquadBlockedRequest request, CancellationToken cancellationToken)
     {
         var command = new RemoveUserSquadBlockedCommand(request.UserId, request.SquadId);

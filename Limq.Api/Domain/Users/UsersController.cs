@@ -24,7 +24,7 @@ public class UsersController : ControllerBase
 
     [HttpGet()]
     [Route("GetUsers")]
-    public async Task<GetUsersDto[]> GetUsers([FromBody] string name, CancellationToken cancellationToken)
+    public async Task<GetUsersDto[]> GetUsers([FromQuery] string name, CancellationToken cancellationToken)
     {
         var query = new GetUserQuery(name);
         var users = await _mediator.Send(query, cancellationToken);
@@ -34,7 +34,7 @@ public class UsersController : ControllerBase
     [HttpGet()]
     [Route("GetUser")]
 
-    public async Task<User> TakeUser([FromBody] string name, CancellationToken cancellationToken)
+    public async Task<User> TakeUser([FromQuery] string name, CancellationToken cancellationToken)
     {
         var command = new GetUserCommand(name);
         var user = await _mediator.Send(command, cancellationToken);
@@ -44,9 +44,15 @@ public class UsersController : ControllerBase
     [HttpPut()]
     [Route("ChangeAvatar")]
 
-    public async Task<Unit> ChangeAvatar([FromBody] ChangeAvatarRequest request, CancellationToken cancellationToken)
+    public async Task<Unit> ChangeAvatar([FromForm] ChangeAvatarRequest request, CancellationToken cancellationToken)
     {
-        var command = new ChangeAvatarCommand(request.Id, request.Avatar);
+        byte[] imageData = null;
+        if (request.Avatar != null)
+        {
+            using var binaryReader = new BinaryReader(request.Avatar.OpenReadStream());
+            imageData = binaryReader.ReadBytes((int)request.Avatar.Length);
+        }
+        var command = new ChangeAvatarCommand(request.Id, imageData);
         await _mediator.Send(command, cancellationToken);
         return Unit.Value;
     }
@@ -102,17 +108,24 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost()]
-
-    public async Task<Unit> CreateUser([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
+    [Route("CreateUser")]
+    public async Task<Unit> CreateUser([FromForm] CreateUserRequest request, CancellationToken cancellationToken)
     {
-        var command = new CreateUserCommand(request.UserName, request.Password, request.FirstName, request.LastName, request.Avatar);
+        byte[] imageData = null;
+        if (request.Avatar != null)
+        {
+            using var binaryReader = new BinaryReader(request.Avatar.OpenReadStream());
+            imageData = binaryReader.ReadBytes((int)request.Avatar.Length);
+        }
+        var command = new CreateUserCommand(request.UserName, request.Password, request.FirstName, request.LastName, imageData);
         await _mediator.Send(command, cancellationToken);
         return Unit.Value;
     }
 
     [HttpDelete()]
+    [Route("RemoveUser")]
 
-    public async Task<Unit> RemoveUser([FromBody] Guid id, CancellationToken cancellationToken)
+    public async Task<Unit> RemoveUser(Guid id, CancellationToken cancellationToken)
     {
         var command = new RemoveUserCommand(id);
         await _mediator.Send(command, cancellationToken);
