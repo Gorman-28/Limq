@@ -2,4 +2,4 @@
 using MediatR;
 
 namespace Limq.Application.Domain.Users.Command.GetUser;
-public record GetUserCommand(string Name) : IRequest<User>;
+public record GetUserCommand(string Name, string Password) : IRequest<User>;

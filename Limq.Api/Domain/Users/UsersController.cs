@@ -34,9 +34,9 @@ public class UsersController : ControllerBase
     [HttpGet()]
     [Route("GetUser")]
 
-    public async Task<User> TakeUser([FromQuery] string name, CancellationToken cancellationToken)
+    public async Task<User> TakeUser([FromQuery] string name, string password, CancellationToken cancellationToken)
     {
-        var command = new GetUserCommand(name);
+        var command = new GetUserCommand(name, password);
         var user = await _mediator.Send(command, cancellationToken);
         return user;
     }

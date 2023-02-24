@@ -13,7 +13,7 @@ public class GetUserCommandHandler : IRequestHandler<GetUserCommand, User>
     }
     public async Task<User> Handle(GetUserCommand command, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.Find(command.Name);
+        var user = await _userRepository.Find(command.Name, command.Password);
         return user;
     }
 }
