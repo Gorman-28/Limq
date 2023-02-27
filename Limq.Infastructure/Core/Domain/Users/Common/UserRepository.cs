@@ -20,6 +20,12 @@ public class UserRepository : IUserRepository
         return Unit.Value;
     }
 
+    public async Task<User> Find(string name)
+    {
+        var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.UserName == name);
+        return user ?? null;
+    }
+
     public async Task<User> Find(string name, string password)
     {
         var user = await _limqDbContext.Users.FirstOrDefaultAsync(u => u.UserName == name && u.Password == password);

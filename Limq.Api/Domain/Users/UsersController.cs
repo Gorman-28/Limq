@@ -1,6 +1,7 @@
 ﻿using Limq.Api.Common;
 using Limq.Api.Domain.Users.Requests;
 using Limq.Application.Domain.Users.Command.ChangeUser;
+using Limq.Application.Domain.Users.Command.CheckUser;
 using Limq.Application.Domain.Users.Command.CreateUser;
 using Limq.Application.Domain.Users.Command.GetUser;
 using Limq.Application.Domain.Users.Command.RemoveUser;
@@ -29,6 +30,15 @@ public class UsersController : ControllerBase
         var query = new GetUserQuery(name);
         var users = await _mediator.Send(query, cancellationToken);
         return users;
+    }
+
+    [HttpGet()]
+    [Route("CheckUser")]
+    public async Task<User> CheckUser([FromQuery] string name, CancellationToken cancellationToken)
+    {
+        var command = new CheckUserCommand(name);
+        var user = await _mediator.Send(command, cancellationToken);
+        return user;
     }
 
     [HttpGet()]
