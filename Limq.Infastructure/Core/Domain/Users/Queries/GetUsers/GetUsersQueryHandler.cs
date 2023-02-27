@@ -24,7 +24,6 @@ public class GetUsersQueryHandler : IRequestHandler<GetUserQuery, GetUsersDto[]>
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Password = user.Password,
                 Status = user.Status,
                 Avatar = user.Avatar
             }).ToArrayAsync(cancellationToken);
