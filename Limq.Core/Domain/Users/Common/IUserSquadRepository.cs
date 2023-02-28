@@ -9,4 +9,6 @@ public interface IUserSquadRepository
     Task<Unit> Remove(Guid userId, Guid squadId);
 
     Task<Unit> RemoveRange(Guid userId);
+
+    Task<Unit> RemoveRangeSquad(Guid squadId);
 }
