@@ -2,4 +2,4 @@
 using MediatR;
 
 namespace Limq.Application.Domain.MessagesChat.Command.CreateMessageChat;
-public record CreateMessageChatCommand(Guid UserFromId, Guid UserToId, string Message, DateTimeOffset MessageTime) : IRequest<Unit>;
+public record CreateMessageChatCommand(Guid UserFromId, Guid UserToId, string Message, DateTime MessageTime) : IRequest<Unit>;

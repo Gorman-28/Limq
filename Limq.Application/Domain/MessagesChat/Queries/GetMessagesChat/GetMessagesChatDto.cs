@@ -5,5 +5,5 @@ public record GetMessagesChatDto
 
     public string Message { get; set; }
 
-    public DateTimeOffset MessageTime { get; set; }
+    public DateTime MessageTime { get; set; }
 }

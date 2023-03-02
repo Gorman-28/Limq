@@ -5,7 +5,7 @@ public class MessageSquad
     {
     }
 
-    private MessageSquad(Guid id, Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime, bool systemMessage)
+    private MessageSquad(Guid id, Guid squadId, Guid userFromId, string message, DateTime messageTime, bool systemMessage)
     {
         Id = id;
         SquadId = squadId;
@@ -23,11 +23,11 @@ public class MessageSquad
 
     public string Message { get; set; }
 
-    public DateTimeOffset MessageTime { get; set; }
+    public DateTime MessageTime { get; set; }
 
     public bool SystemMessage { get; set; }
 
-    public static MessageSquad Create(Guid squadId, Guid userFromId, string message, DateTimeOffset messageTime, bool systemMessage)
+    public static MessageSquad Create(Guid squadId, Guid userFromId, string message, DateTime messageTime, bool systemMessage)
     {
         return new MessageSquad(Guid.NewGuid(), squadId, userFromId, message, messageTime, systemMessage);
     }

@@ -6,7 +6,7 @@ public class MessageChat
     {
     }
 
-    private MessageChat(Guid id, Guid userFromId, Guid userToId, string message, DateTimeOffset messageTime)
+    private MessageChat(Guid id, Guid userFromId, Guid userToId, string message, DateTime messageTime)
     {
         Id = id;
         UserFromId = userFromId;
@@ -23,9 +23,9 @@ public class MessageChat
 
     public string Message { get; set; }
 
-    public DateTimeOffset MessageTime { get; set; }
+    public DateTime MessageTime { get; set; }
 
-    public static MessageChat Create(Guid userFromId, Guid userToId, string message, DateTimeOffset messageTime)
+    public static MessageChat Create(Guid userFromId, Guid userToId, string message, DateTime messageTime)
     {
         return new MessageChat(Guid.NewGuid(), userFromId, userToId, message, messageTime);
     }

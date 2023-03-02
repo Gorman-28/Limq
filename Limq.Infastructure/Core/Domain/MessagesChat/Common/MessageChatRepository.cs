@@ -19,13 +19,13 @@ public class MessageChatRepository : IMessageChatRepository
         return Unit.Value;
     }
 
-    public async Task<MessageChat> Find(Guid userFromId, Guid userToId, DateTimeOffset time)
+    public async Task<MessageChat> Find(Guid userFromId, Guid userToId, DateTime time)
     {
         var messageChat = await _limqDbContext.MessagesChat.FirstOrDefaultAsync(mc => mc.UserFromId == userFromId && mc.UserToId == userToId && mc.MessageTime.Equals(time));
         return messageChat;
     }
 
-    public async Task<Unit> Remove(Guid userFromId, Guid userToId, DateTimeOffset time)
+    public async Task<Unit> Remove(Guid userFromId, Guid userToId, DateTime time)
     {
         var messageChat = await _limqDbContext.MessagesChat.FirstOrDefaultAsync(mc => mc.UserFromId == userFromId && mc.UserToId == userToId && mc.MessageTime.Equals(time));
         _limqDbContext.MessagesChat.Remove(messageChat);

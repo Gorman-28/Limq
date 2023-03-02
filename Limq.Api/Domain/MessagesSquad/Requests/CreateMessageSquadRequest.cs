@@ -1,3 +1,3 @@
 ﻿namespace Limq.Api.Domain.MessagesSquad.Requests;
 
-public record CreateMessageSquadRequest(Guid SquadId, Guid UserFromId, string Message, DateTimeOffset MessageTime, bool SystemMessage);
+public record CreateMessageSquadRequest(Guid SquadId, Guid UserFromId, string Message, DateTime MessageTime, bool SystemMessage);

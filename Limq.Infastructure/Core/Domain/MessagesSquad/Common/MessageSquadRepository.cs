@@ -20,13 +20,13 @@ public class MessageSquadRepository : IMessageSquadRepository
         return Unit.Value;
     }
 
-    public async Task<MessageSquad> Find(Guid squadId, Guid userId, DateTimeOffset dateTimeOffset)
+    public async Task<MessageSquad> Find(Guid squadId, Guid userId, DateTime dateTimeOffset)
     {
         var messageSquad = await _limqDbContext.MessagesSquad.FirstOrDefaultAsync(ms => ms.SquadId == squadId && ms.UserFromId == userId && ms.MessageTime.Equals(dateTimeOffset));
         return messageSquad;
     }
 
-    public async Task<Unit> Remove(Guid squadId, Guid userId, DateTimeOffset dateTimeOffset)
+    public async Task<Unit> Remove(Guid squadId, Guid userId, DateTime dateTimeOffset)
     {
         var messageSquad = await _limqDbContext.MessagesSquad.FirstOrDefaultAsync(ms => ms.SquadId == squadId && ms.UserFromId == userId && ms.MessageTime.Equals(dateTimeOffset));
         _limqDbContext.MessagesSquad.Remove(messageSquad);

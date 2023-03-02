@@ -13,7 +13,7 @@ public record GetMessagesSquadDto
 
     public string Message { get; set; }
 
-    public DateTimeOffset MessageTime { get; set; }
+    public DateTime MessageTime { get; set; }
 
     public bool SystemMessage { get; set; }
 }
