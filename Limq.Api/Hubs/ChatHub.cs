@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.SignalR;
 namespace Limq.Api.Hubs;
 
 
-[Route("/ChatHub")]
 public class ChatHub : Hub
 {
 

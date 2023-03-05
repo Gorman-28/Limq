@@ -49,13 +49,15 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseRouting();
 
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<ChatHub>($"/{nameof(ChatHub)}");
     endpoints.MapHub<SquadHub>($"/{nameof(SquadHub)}");
 });
 
-app.UseAuthorization();
+
 
 app.MapControllers();
 
