@@ -4,6 +4,7 @@ using Limq.Persistence.LimqDb;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Limq.Persistence.LimqDb.Migrations
 {
     [DbContext(typeof(LimqDbContext))]
-    partial class LimqDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230307192336_AddThemeColumn")]
+    partial class AddThemeColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

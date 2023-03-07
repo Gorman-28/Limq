@@ -117,6 +117,16 @@ public class UsersController : ControllerBase
         return Unit.Value;
     }
 
+    [HttpPut()]
+    [Route("ChangeTheme")]
+
+    public async Task<Unit> ChangeTheme([FromForm] ChangeThemeRequest request, CancellationToken cancellationToken)
+    {
+        var command = new ChangeThemeCommand(request.Id, request.Theme);
+        await _mediator.Send(command, cancellationToken);
+        return Unit.Value;
+    }
+
     [HttpPost()]
     [Route("CreateUser")]
     public async Task<Unit> CreateUser([FromForm] CreateUserRequest request, CancellationToken cancellationToken)

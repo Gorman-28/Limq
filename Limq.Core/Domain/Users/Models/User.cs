@@ -12,6 +12,7 @@ public class User
         LastName = lastName;
         Avatar = avatar;
         Status = true;
+        Theme = true;
     }
 
     private User()
@@ -32,6 +33,8 @@ public class User
 #pragma warning restore CA1819 // Properties should not return arrays
 
     public bool Status { get; set; }
+
+    public bool Theme { get; set; }
 
     public ICollection<UserSquad> UserSquads { get; private set; }
 
