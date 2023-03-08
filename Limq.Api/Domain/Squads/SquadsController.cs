@@ -68,7 +68,7 @@ public class SquadsController : ControllerBase
     [HttpPost]
     [Route("CreateSquad")]
 
-    public async Task<Unit> CreateSquad([FromForm] CreateSquadRequest request, CancellationToken cancellationToken)
+    public async Task<Guid> CreateSquad([FromForm] CreateSquadRequest request, CancellationToken cancellationToken)
     {
         byte[] imageData = null;
         if (request.Avatar != null)
@@ -77,8 +77,8 @@ public class SquadsController : ControllerBase
             imageData = binaryReader.ReadBytes((int)request.Avatar.Length);
         }
         var command = new CreateSquadCommand(request.Name, imageData, request.AdminId);
-        await _mediator.Send(command, cancellationToken);
-        return Unit.Value;
+        var id = await _mediator.Send(command, cancellationToken);
+        return id;
     }
 
     [HttpDelete]

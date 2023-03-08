@@ -6,7 +6,7 @@ using Limq.Core.Domain.Users.Models;
 using MediatR;
 
 namespace Limq.Application.Domain.Squads.Command.CreateSquad;
-public class CreateSquadCommandHandler : IRequestHandler<CreateSquadCommand, Unit>
+public class CreateSquadCommandHandler : IRequestHandler<CreateSquadCommand, Guid>
 {
     private readonly ISquadRepository _squadRepository;
     private readonly IUserSquadRepository _userSquadRepository;
@@ -18,13 +18,13 @@ public class CreateSquadCommandHandler : IRequestHandler<CreateSquadCommand, Uni
         _userSquadRepository = userSquadRepository;
         _unitOfWork = unitOfWork;
     }
-    public async Task<Unit> Handle(CreateSquadCommand command, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateSquadCommand command, CancellationToken cancellationToken)
     {
         var squad = Squad.Create(command.Name, command.Avatar, command.AdminId);
         var userSquad = UserSquad.Create(command.AdminId, squad.Id);
         await _userSquadRepository.Add(userSquad);
         await _squadRepository.Add(squad);
         await _unitOfWork.SaveChanges();
-        return Unit.Value;
+        return squad.Id;
     }
 }
